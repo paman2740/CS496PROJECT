@@ -30,14 +30,10 @@
         <div class="row">
             <div class="col-md-3">
                 {% if request.user.is_authenticated %}
-                <p>Hello {{request.user}}</p>
-                <nav>
-                    <a href="{% url 'logout'%}">logout</a>
-                </nav>
                 
                 <div class="card">
                     <div class="card-header">
-                        Categories
+                        Hello {{request.user}}
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
@@ -53,6 +49,13 @@
 
 
                         <a href="{% url 'add' %}" class="btn btn-dark btn-block btn-sm m-1">Add Photo</a>
+
+                        <a href="{% url 'addCase' %}" class="btn btn-dark btn-block btn-sm m-1">Add Case</a>
+
+                        <a href="{% url 'witnessList' %}" class="btn btn-dark btn-block btn-sm m-1">Witness List</a>
+
+                        <a href="{% url 'customer_register' %}" class="btn btn-dark btn-block btn-sm m-1"> Create Witness</a>
+    
                         <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
                     </ul>
                 </div>
@@ -67,7 +70,7 @@
                             <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
 
                             <div class="card-body">
-                                <small>Category: {{photo.category.name}}</small>
+                                <small></small>
                             </div>
                             <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
                         </div>

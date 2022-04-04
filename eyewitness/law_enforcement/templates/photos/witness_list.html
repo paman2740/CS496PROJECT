@@ -1,3 +1,4 @@
+<h1>These are all the witnesses</h1>
 <!DOCTYPE html>
 <html>
 
@@ -20,17 +21,19 @@
                 <a href="{% url 'gallery' %}" class="btn btn-dark my-3">Go Back</a>
 
                 <div style="height: 90vh;">
-                    <img style="max-width: 100%; max-height: 100%;" src="{{photo.image.url}}">
+                	{% for photo in photos %}
                     <ul>
-                        <li>Description: {{photo.description}}</li>
-                        <li>Height     : {{photo.Height}}</li>
-                        <li>HairColor  : {{photo.HairColor}}</li>
-                        <li>HairType   : {{photo.HairType}}</li>
-                        <li>EyeColor   : {{photo.EyeColor}}</li>
-                        <li>Glasses    : {{photo.Glasses}}</li>
-                        <li>Scar       : {{photo.Scar}}</li>
+                        <li>Name: {{photo.user.first_name}}</li>
+                        <li>Last     : {{photo.user.last_name}}</li>
+                        <li>phone_number     : {{photo.phone_number}}</li>
+                        <li>location     : {{photo.location}}</li>
+                        <li>Photo     : {{photo.case}}</li>
+                        
                     </ul>
-                    <a href="{% url 'addLineup' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Add</a>
+                    
+                    {% empty %}
+                    <h3>No Witnesses.....</h3>
+                    {% endfor %}
                 </div>
 
             </div>

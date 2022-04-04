@@ -37,57 +37,46 @@
 
                         <div class="form-group m-3">
                             <label>Haircolor</label>
-                            <input required name="haircolor" type="text" placeholder="Enter a description"
-                                class="form-control">
+                            <select name="haircolor">
+                                <option value="Black">Black</option>
+                                <option value="Blonde">Blonde</option>
+                                <option value="Brown">Brown</option>
+                                <option value="Red">Red</option>
+                            </select>
                         </div>
 
                         <div class="form-group m-3">
                             <label>Hairtype</label>
-                            <input required name="hairtype" type="text" placeholder="Enter a description"
-                                class="form-control">
+                            <select name="hairtype">
+                                <option value="Black">Black</option>
+                                <option value="Blonde">Blonde</option>
+                                <option value="Brown">Brown</option>
+                                <option value="Red">Red</option>
+                            </select>
                         </div>
 
                         <div class="form-group m-3">
                             <label>Eyecolor</label>
-                            <input required name="eyecolor" type="text" placeholder="Enter a description"
-                                class="form-control">
-                            
+                            <select name="eyecolor">
+                                <option value="Black">Black</option>
+                                <option value="Blonde">Blonde</option>
+                                <option value="Brown">Brown</option>
+                                <option value="Red">Red</option>
+                            </select>
                         </div>
+                        
                         <div class="form-group m-3">
                             <label>Glasses</label>
-                            <select name="scar" class="form-control">
-                                <option value="">--Please choose an option--</option>
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
-                            </select>
+                            <input type="radio" name="glasses" value="Yes" class=>Yes
+                            <input type="radio" name="glasses" value="No" >No
                             
                         </div>
+
                         <div class="form-group m-3">
                             <label>Scar</label>
-                            <select name="scar" class="form-control">
-                                <option value="">--Please choose an option--</option>
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                                                    
-                        </div>
-
-                        <div class="form-group m-3">
-                            <label>Select a Case</label>
-                            <select name="category" class="form-control">
-                                <option value='none'>Select a Case...</option>
-
-                                {% for category in categories %}
-                                <option value='{{category.id}}'>{{category.name}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
-
-                        <div class="form-group m-3">
-                            <label>Create a new Case</label>
-                            <input name="category_new" type="text" placeholder="Create a new case"
-                                class="form-control">
+                            <input type="radio" name="scar" value="Yes" class=>Yes
+                               <input type="radio" name="scar" value="No" >No
+                            
                         </div>
 
                         <div class="form-group m-3">
@@ -98,6 +87,8 @@
                         <button type='submit' class="btn btn-primary m-3">Submit</button>
 
                     </form>
+
+
                 </div>
             </div>
         </div>
