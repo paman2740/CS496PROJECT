@@ -23,27 +23,35 @@ class Case(models.Model):
         verbose_name = 'Case'
         verbose_name_plural = 'Cases'
     name = models.CharField(max_length=100, null=False, blank=False)
-    photo_1 = models.ManyToManyField(Photo, blank=True, related_name="photo_1")
-    photo_2 = models.ManyToManyField(Photo, blank=True, related_name="photo_2")
-    photo_3 = models.ManyToManyField(Photo, blank=True, related_name="photo_3")
     
 
     def __str__(self):
         return self.name
+        
 
 class User(AbstractUser):
-    is_customer = models.BooleanField(default=False)
-    is_employee = models.BooleanField(default=False)
+    is_officer = models.BooleanField(default=False)
+    is_witness = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.first_name
 
-class Customer(models.Model):
+
+class Witness(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
     phone_number = models.CharField(max_length=20)
     location = models.CharField(max_length=20)
     case = models.ManyToManyField(Case, blank=True)
+    def __str__(self):
+        return self.user.first_name
 
-class Employee(models.Model):
+class Officer(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
     phone_number = models.CharField(max_length=20)
     designation = models.CharField(max_length=20)
+
+class LineUp(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+    photo = models.ForeignKey(Photo, blank=True, null=True, on_delete=models.SET_NULL)
+    case =  models.ForeignKey(Case, blank=True, null=True, on_delete=models.SET_NULL)

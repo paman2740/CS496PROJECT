@@ -2,28 +2,29 @@ from django.contrib.auth import login, logout,authenticate
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.views.generic import CreateView
-from .form import CustomerSignUpForm, EmployeeSignUpForm
+from .form import WitnessSignUpForm, OfficerSignUpForm, LineUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User
-from .models import Photo, Customer, Case
+from django.http import HttpResponseRedirect
+from .models import Photo, Officer, Case, LineUp
 from django.contrib.auth.decorators import login_required
 
 def register(request):
     return render(request, '../templates/register.html')
 
-class customer_register(CreateView):
+class witness_register(CreateView):
     model = User
-    form_class = CustomerSignUpForm
-    template_name = '../templates/customer_register.html'
+    form_class = WitnessSignUpForm
+    template_name = '../templates/witness_register.html'
 
     def form_valid(self, form):
         user = form.save()
         return redirect('gallery')
 
-class employee_register(CreateView):
+class officer_register(CreateView):
     model = User
-    form_class = EmployeeSignUpForm
-    template_name = '../templates/employee_register.html'
+    form_class = OfficerSignUpForm
+    template_name = '../templates/officer_register.html'
 
     def form_valid(self, form):
         user = form.save()
@@ -37,9 +38,10 @@ def login_request(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None :
-                login(request,user)
+            officer = authenticate(username=username, password=password)
+
+            if officer is not None :
+                login(request,officer)
                 return redirect('gallery')
             else:
                 messages.error(request,"Invalid username or password")
@@ -55,42 +57,61 @@ def logout_view(request):
 
 @login_required(login_url='login')
 def gallery(request):
-    
-    category = request.GET.get('category')
-    if category == None:
-        photos = Photo.objects.all()
-    else:
-        photos = Photo.objects.all()
+    photos = Photo.objects.all()
+    #user = request.user
+    #venues = LineUp.objects.filter(user=user)
 
     context = {'photos': photos}
+
     return render(request, 'photos/gallery.html', context)
 
+@login_required(login_url='login')
+def lineUp(request):
+    
+    lines = LineUp.objects.all()
+
+    context = {'lines': lines}
+    return render(request, 'photos/lineUp.html', context)
+
+@login_required(login_url='login')
+def addLineup(request, pk):
+    Users=User.objects.all()
+    Cases=Case.objects.all()
+    ref = Photo.objects.get(id=pk)
+
+    submitted = False
+    if request.method == "POST":
+        form = LineUpForm(request.POST, request.FILES)
+        if form.is_valid():
+            venue = form.save(commit=False)
+            venue.photo = ref
+            venue.save()
+            #form.save()
+            submitted = True
+            return  redirect('gallery')   
+    else:
+        form = LineUpForm
+        if 'submitted' in request.GET:
+            submitted = True
+    
+    return render(request, 'photos/addLineup.html', 
+             {'Cases': Cases,
+             'Users': Users,
+             'form':form, 
+             'submitted':submitted})
 
 
 @login_required(login_url='login')
 def viewPhoto(request, pk):
     photo = Photo.objects.get(id=pk)
+
     return render(request, 'photos/photo.html', {'photo': photo}, )
 
-@login_required(login_url='login')
-def addLineup(request, pk):
-    Cases=Case.objects.all()
-    
-    photo = Photo.objects.get(id=pk)
-    if request.method == 'POST':
-        data = request.POST
-        photo_num=data['photo_num']
-        post = Case.objects.get(id=data['case'])
-        post.photo_1.add(photo)
-
-    
-    return render(request, 'photos/addLineup.html', 
-             {'Cases': Cases},)
 
 
 @login_required(login_url='login')
 def witnessList(request):
-    photos =Customer.objects.all()
+    photos =Witness.objects.all()
     return render(request, 'photos/witness_list.html', 
         {'photos': photos })
 
@@ -129,3 +150,28 @@ def addCase(request):
 
         return redirect('gallery')
     return render(request, 'photos/addCase.html')
+
+def search_photo(request):
+    if request.method == "POST":
+        scars = request.POST['scars']
+        glasses = request.POST['glasses']
+        haircolor =request.POST['haircolor']
+        hairtype =request.POST['hairtype']
+        eyecolor =request.POST['eyecolor']
+        venues = Photo.objects.filter(Scar__contains=scars).filter(Glasses__contains=glasses).filter(EyeColor__contains=eyecolor).filter(HairType__contains=hairtype).filter(HairColor__contains=haircolor)
+    
+        return render(request, 
+        'photos/filter.html', 
+        {
+        'venues':venues})
+    else:
+        return render(request, 
+        'photos/filter.html', 
+        {})
+def witness_view(request):
+    user = request.user
+    venues = LineUp.objects.filter(user=user)
+
+    context = { 'venues': venues }
+
+    return render(request, 'photos/witness_view.html', context)

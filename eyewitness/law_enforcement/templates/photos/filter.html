@@ -29,35 +29,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                {% if request.user.is_officer %}
+                {% if request.user.is_authenticated %}
                 
                 <div class="card">
                     <div class="card-header">
                         Hello {{request.user}}
                     </div>
-                    
-
-
-                        <a href="{% url 'add' %}" class="btn btn-dark btn-block btn-sm m-1">Add Photo</a>
-
-                        <a href="{% url 'addCase' %}" class="btn btn-dark btn-block btn-sm m-1">Add Case</a>
-
-                        <a href="{% url 'witnessList' %}" class="btn btn-dark btn-block btn-sm m-1">Witness List</a>
-
-                        <a href="{% url 'lineUp' %}" class="btn btn-dark btn-block btn-sm m-1"> LineUp</a>
-
-                        <a href="{% url 'witness_register' %}" class="btn btn-dark btn-block btn-sm m-1"> Create Witness</a>
-    
+                        <a href="{% url 'gallery' %}" class="btn btn-dark btn-block btn-sm m-1">Go Back</a>
                         <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
+
                     </ul>
                 </div>
 
             </div>
             <div class="col-md-9">
-                <div class="row">
-                    <form method=POST action="{% url 'search_photo' %}">
-                            {% csrf_token %}
 
+                <div class="row">
+                    <form method=POST action="">
+                            {% csrf_token %}
                             <div class="form-group m-3">
                                 <label>Haircolor</label>
                                 <select name="haircolor">
@@ -66,7 +55,9 @@
                                     <option value="Brown">Brown</option>
                                     <option value="Red">Red</option>
                                 </select>
-                            
+                            </div>
+
+                            <div class="form-group m-3">
                                 <label>Hairtype</label>
                                 <select name="hairtype">
                                     <option value="Black">Black</option>
@@ -74,7 +65,9 @@
                                     <option value="Brown">Brown</option>
                                     <option value="Red">Red</option>
                                 </select>
-                    
+                            </div>
+
+                            <div class="form-group m-3">
                                 <label>Eyecolor</label>
                                 <select name="eyecolor">
                                     <option value="Black">Black</option>
@@ -88,24 +81,27 @@
                                 <label>Scar</label>
                                 <input type="radio" name="scars" value="Yes" class=>Yes
                                    <input type="radio" name="scars" value="No" >No
-            
+                            </div>
+
+                            <div class="form-group m-3">
                                 <label>Glasses</label>
                                 <input type="radio" name="glasses" value="Yes" class=>Yes
                                    <input type="radio" name="glasses" value="No" >No
                                 
                             </div>
                             <button class="btn btn-outline-secondary" type="submit">Filter</button>
-                        </form>
 
-                    {% for photo in photos %}
+
+                        </form>
+                    {% for line in venues %}
                     <div class="col-md-4">
                         <div class="card my-2">
-                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
+                            <img class="image-thumbail" src="{{line.image.url}}" alt="Card image cap">
 
                             <div class="card-body">
                                 <small></small>
                             </div>
-                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                            <a href="{% url 'photo' line.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
                         </div>
                     </div>
                     {% empty %}
@@ -119,9 +115,8 @@
                 {% else %}
                 <p>Hello please login</p>
                 <nav>
-                    <a href="{% url 'login'%}" class="btn btn-dark btn-block btn-sm m-1">login</a>
-                    <a href="{% url 'witness_view'%}" class="btn btn-dark btn-block btn-sm m-1">Begin</a>
-                    
+                    <a href="{% url 'login'%}">login</a>
+                    <a href="{% url 'register_user'%}">register</a>
                 </nav>
                 {% endif %}
 </body>
