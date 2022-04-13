@@ -55,3 +55,7 @@ class LineUp(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     photo = models.ForeignKey(Photo, blank=True, null=True, on_delete=models.SET_NULL)
     case =  models.ForeignKey(Case, blank=True, null=True, on_delete=models.SET_NULL)
+
+class finalPhoto(models.Model):
+    ide_photo = models.ForeignKey(LineUp, blank=True, null=True, on_delete=models.SET_NULL)
+    confidence = models.IntegerField()

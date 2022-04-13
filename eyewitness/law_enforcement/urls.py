@@ -17,5 +17,7 @@ urlpatterns = [
      path('lineUp/', views.lineUp, name='lineUp'),
      path('search_photo/', views.search_photo, name='search_photo'),
      path('witness_view/', views.witness_view, name='witness_view'),
-     
+     path('photoWitness/<str:pk>/', views.photoWitness, name='photoWitness'),
+     path('finalSubmit/<str:pk>/', views.finalSubmit, name='finalSubmit'),
+     path('submittedPhoto/', views.submittedPhoto, name='submittedPhoto'),
 ]

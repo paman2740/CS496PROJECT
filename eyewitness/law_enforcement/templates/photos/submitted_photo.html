@@ -29,12 +29,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                {% if request.user.is_witness %}
+                {% if request.user.is_authenticated %}
                 
                 <div class="card">
                     <div class="card-header">
                         Hello {{request.user}}
                     </div>
+
     
                         <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
                     </ul>
@@ -44,15 +45,16 @@
             <div class="col-md-9">
                 <div class="row">
 
-                    {% for photo in venues %}
+                    {% for photo in photo %}
                     <div class="col-md-4">
                         <div class="card my-2">
-                            <img class="image-thumbail" src="{{photo.photo.image.url}}" alt="Card image cap">
-
+                            <img class="image-thumbail" src="{{photo.ide_photo.photo.image.url}}" alt="Card image cap">
+                            Confidence = {{photo.confidence}} <br>
+                            User = {{photo.ide_photo.user}}
                             <div class="card-body">
                                 <small></small>
                             </div>
-                            <a href="{% url 'photoWitness' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
                         </div>
                     </div>
                     {% empty %}
@@ -67,8 +69,6 @@
                 <p>Hello please login</p>
                 <nav>
                     <a href="{% url 'login'%}">login</a>
-                    <a href="{% url 'witness_view'%}">Witness</a>
-                    
                 </nav>
                 {% endif %}
 </body>

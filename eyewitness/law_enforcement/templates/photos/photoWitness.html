@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Photo</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+</head>
+
+<body class="m-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+
+                <a href="{% url 'witness_view' %}" class="btn btn-dark my-3">Go Back</a>
+
+                <div style="height: 90vh;">
+                    <img style="max-width: 100%; max-height: 100%;" src="{{photo.photo.image.url}}">
+                    <ul>
+                        <li>Description: {{photo.photo.description}}</li>
+                        <li>Height     : {{photo.photo.Height}}</li>
+                        <li>HairColor  : {{photo.photo.HairColor}}</li>
+                        <li>HairType   : {{photo.photo.HairType}}</li>
+                        <li>EyeColor   : {{photo.photo.EyeColor}}</li>
+                        <li>Glasses    : {{photo.photo.Glasses}}</li>
+                        <li>Scar       : {{photo.photo.Scar}}</li>
+                    </ul>
+                    <a href="{% url 'finalSubmit' photo.id  %}" class="btn btn-outline-dark btn-sm m-1">Add</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

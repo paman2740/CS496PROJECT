@@ -6,7 +6,7 @@ from .form import WitnessSignUpForm, OfficerSignUpForm, LineUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 from django.http import HttpResponseRedirect
-from .models import Photo, Officer, Case, LineUp
+from .models import Photo, Officer, Case, LineUp, finalPhoto
 from django.contrib.auth.decorators import login_required
 
 def register(request):
@@ -107,7 +107,15 @@ def viewPhoto(request, pk):
 
     return render(request, 'photos/photo.html', {'photo': photo}, )
 
+def submittedPhoto(request):
+    photo = finalPhoto.objects.all()
 
+    return render(request, 'photos/submitted_Photo.html', {'photo': photo}, )
+
+def photoWitness(request, pk):
+    photo = LineUp.objects.get(id=pk)
+
+    return render(request, 'photos/photoWitness.html', {'photo': photo}, )
 
 @login_required(login_url='login')
 def witnessList(request):
@@ -175,3 +183,17 @@ def witness_view(request):
     context = { 'venues': venues }
 
     return render(request, 'photos/witness_view.html', context)
+
+def finalSubmit(request, pk):
+    ref = LineUp.objects.get(id=pk)
+
+    submitted = False
+    if request.method == "POST":
+        data = request.POST
+        finalPhoto.objects.create(
+            ide_photo= ref,
+            confidence = data['confidence'],
+            )
+        return redirect('witness_view')
+    
+    return render(request, 'photos/submitPhoto.html')

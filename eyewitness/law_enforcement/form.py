@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from django import forms
 from django.db import transaction
-from .models import User,Witness,Officer, Case, LineUp
+from .models import User,Witness,Officer, Case, LineUp, finalPhoto
 
 class WitnessSignUpForm(UserCreationForm):
     first_name = forms.CharField(required=True)
