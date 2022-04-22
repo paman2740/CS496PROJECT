@@ -1,3 +1,40 @@
+commit 0c1f08acf4c15549b35d599df3cef80a1cb19576
+Merge: 68455c7 8eaab47
+Author: paman2740 <45908933+paman2740@users.noreply.github.com>
+Date:   Fri Apr 22 13:46:28 2022 -0500
+
+    Merge branch 'main' of https://github.com/paman2740/CS496PROJECT
+
+commit 68455c7b00f3a1f9fca8163c3e85a8cc5fa82ee6
+Author: paman2740 <45908933+paman2740@users.noreply.github.com>
+Date:   Fri Apr 22 13:46:06 2022 -0500
+
+    log.txt
+
+commit 8eaab4786da22828900cb1d131960700e96514df
+Author: ChaudhariKhyati <98857857+ChaudhariKhyati@users.noreply.github.com>
+Date:   Fri Apr 22 13:39:27 2022 -0500
+
+    Update forms.py
+
+commit 76719299f79a3183de41cfcf395acd02e18e76d0
+Author: ChaudhariKhyati <98857857+ChaudhariKhyati@users.noreply.github.com>
+Date:   Fri Apr 22 13:38:25 2022 -0500
+
+    Update urls.py
+
+commit d3e97b065b17606097576313e18f901f8ea74916
+Author: ChaudhariKhyati <98857857+ChaudhariKhyati@users.noreply.github.com>
+Date:   Fri Apr 22 13:37:16 2022 -0500
+
+    Update views.py
+
+commit e77b984904404b58d351da8e2a341f092d90b927
+Author: ChaudhariKhyati <98857857+ChaudhariKhyati@users.noreply.github.com>
+Date:   Fri Apr 22 13:34:45 2022 -0500
+
+    Update settings.py
+
 commit 4203e93f90a2cb64a396823c2f46e39e73d78bdb
 Author: paman2740 <45908933+paman2740@users.noreply.github.com>
 Date:   Wed Apr 13 10:25:05 2022 -0500
