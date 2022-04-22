@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 def register(request):
     return render(request, '../templates/register.html')
 
+
+
 class witness_register(CreateView):
     model = User
     form_class = WitnessSignUpForm
