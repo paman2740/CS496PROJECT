@@ -18,6 +18,7 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
+# mapping between URLs and views
 urlpatterns = [
     path('', include('members.urls')),
     path('admin/', admin.site.urls),
