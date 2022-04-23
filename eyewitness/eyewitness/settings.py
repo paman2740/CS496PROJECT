@@ -76,7 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'eyewitness.wsgi.application'
 
 
-# Create the Database
+# Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {

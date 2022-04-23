@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-# table for photo descriptions
+from datetime import datetime
+
 class Photo(models.Model):
     class Meta:
         verbose_name = 'Photo'
         verbose_name_plural = 'Photos'
     
-    image = models.ImageField(null=False, blank=False)
+    image = models.ImageField( blank=True)
     description = models.TextField(default="Aman")
     Height=models.FloatField(default=0.00)
-    HairColor=models.TextField(default="Aman")
-    HairType=models.TextField(default="Aman")
-    EyeColor=models.TextField(default="Aman")
+    HairColor=models.TextField(default="None")
+    HairType=models.TextField(default="None")
+    EyeColor=models.TextField(default="None")
     Glasses=models.TextField(default="No")
     Scar=models.TextField(default="No")
 
@@ -34,6 +35,8 @@ class User(AbstractUser):
     is_witness = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    login_time= models.DateTimeField(default= datetime.now(), blank=True)
+    logout_time= models.DateTimeField(default= datetime.now(),blank=True)
     def __str__(self):
         return self.first_name
 

@@ -8,11 +8,10 @@ from .models import User
 from django.http import HttpResponseRedirect
 from .models import Photo, Officer, Case, LineUp, finalPhoto
 from django.contrib.auth.decorators import login_required
+import datetime
 
 def register(request):
     return render(request, '../templates/register.html')
-
-
 
 class witness_register(CreateView):
     model = User
@@ -37,6 +36,8 @@ class officer_register(CreateView):
 def login_request(request):
     if request.method=='POST':
         form = AuthenticationForm(data=request.POST)
+
+
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -44,6 +45,8 @@ def login_request(request):
 
             if officer is not None :
                 login(request,officer)
+                some = request.user
+                User.objects.filter(id=some.id).update(login_time = datetime.datetime.now())
                 return redirect('gallery')
             else:
                 messages.error(request,"Invalid username or password")
@@ -53,7 +56,9 @@ def login_request(request):
     context={'form':AuthenticationForm()})
 
 def logout_view(request):
+    some = request.user
     logout(request)
+    User.objects.filter(id=some.id).update(logout_time = datetime.datetime.now())
     return redirect('gallery')
 
 
@@ -147,6 +152,39 @@ def addPhoto(request):
         return redirect('gallery')
 
     return render(request, 'photos/add.html')
+
+def editSuspect(request, pk):
+    values = Photo.objects.get(id=pk)
+
+    if request.method == 'POST':
+        data = request.POST
+        if request.FILES:
+            images = request.FILES.getlist('images')
+            values = Photo.objects.update(
+                description=data['description'],
+                image=image,
+                Height=data['height'],
+                HairColor=data['haircolor'],
+                HairType=data['hairtype'],
+                EyeColor=data['eyecolor'],
+                Glasses=data['glasses'],
+                Scar=data['scar'],
+            )
+        else:
+            values = Photo.objects.update(
+                description=data['description'],
+                Height=data['height'],
+                HairColor=data['haircolor'],
+                HairType=data['hairtype'],
+                EyeColor=data['eyecolor'],
+                Glasses=data['glasses'],
+                Scar=data['scar'],
+            )
+
+
+        return redirect('gallery')
+
+    return render(request, 'photos/edit_Suspect.html', {'values' : values})
 
 @login_required(login_url='login')
 def addCase(request):

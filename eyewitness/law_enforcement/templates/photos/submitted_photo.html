@@ -36,6 +36,7 @@
                         Hello {{request.user}}
                     </div>
 
+                        <a href="{% url 'gallery' %}" class="btn btn-dark my-3">Go Back</a>
     
                         <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
                     </ul>
@@ -50,7 +51,10 @@
                         <div class="card my-2">
                             <img class="image-thumbail" src="{{photo.ide_photo.photo.image.url}}" alt="Card image cap">
                             Confidence = {{photo.confidence}} <br>
-                            User = {{photo.ide_photo.user}}
+                            User = {{photo.ide_photo.user}} <br>
+                            Login time = {{photo.ide_photo.user.login_time | date:'Y-m-d H:i:s'}} <br>
+                            Logout time = {{photo.ide_photo.user.logout_time | date:'Y-m-d H:i:s'}} <br>
+                            
                             <div class="card-body">
                                 <small></small>
                             </div>

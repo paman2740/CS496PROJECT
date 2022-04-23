@@ -31,6 +31,8 @@
                         <li>Scar       : {{photo.Scar}}</li>
                     </ul>
                     <a href="{% url 'addLineup' photo.id  %}" class="btn btn-outline-dark btn-sm m-1">Add</a>
+
+                    <a href="{% url 'editSuspect' photo.id %}" class="btn btn-dark btn-block btn-sm m-1"> Edit Sustect</a>
                 </div>
 
             </div>

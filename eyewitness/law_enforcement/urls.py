@@ -19,5 +19,6 @@ urlpatterns = [
      path('witness_view/', views.witness_view, name='witness_view'),
      path('photoWitness/<str:pk>/', views.photoWitness, name='photoWitness'),
      path('finalSubmit/<str:pk>/', views.finalSubmit, name='finalSubmit'),
+     path('editSuspect/<str:pk>/', views.editSuspect, name='editSuspect'),
      path('submittedPhoto/', views.submittedPhoto, name='submittedPhoto'),
 ]
