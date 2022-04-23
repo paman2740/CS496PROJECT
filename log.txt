@@ -1,3 +1,15 @@
+commit 711c28f21fae7239ba276c7be4e5b7c7b1606ce3
+Author: wcraddock1452 <wcraddock@murraystate.edu>
+Date:   Fri Apr 22 13:55:09 2022 -0500
+
+    Update models.py
+
+commit f7286484ffec8daf04c6fbd75105212a68905b74
+Author: paman2740 <45908933+paman2740@users.noreply.github.com>
+Date:   Fri Apr 22 13:50:04 2022 -0500
+
+    log.txt
+
 commit 0c1f08acf4c15549b35d599df3cef80a1cb19576
 Merge: 68455c7 8eaab47
 Author: paman2740 <45908933+paman2740@users.noreply.github.com>
