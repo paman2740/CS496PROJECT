@@ -1,3 +1,15 @@
+commit ccc1a294b7247e12c919f45496676ae7309f9dca
+Author: paman2740 <45908933+paman2740@users.noreply.github.com>
+Date:   Sat Apr 23 17:04:58 2022 -0500
+
+    editSuspect added
+
+commit 2b658ca9c788a8584035011d3e2ecfd64ae1ca9a
+Author: paman2740 <45908933+paman2740@users.noreply.github.com>
+Date:   Sat Apr 23 17:04:02 2022 -0500
+
+    Update log.txt
+
 commit 711c28f21fae7239ba276c7be4e5b7c7b1606ce3
 Author: wcraddock1452 <wcraddock@murraystate.edu>
 Date:   Fri Apr 22 13:55:09 2022 -0500
